@@ -1,0 +1,39 @@
+To set the default font in Outlook 365 through Intune, you can utilize Intune's configuration policies. Here's a sample script to configure the default font settings:
+
+```powershell
+# Define the XML template for configuring default font settings
+$xmlTemplate = @"
+<Configuration>
+  <Add-OfficeClientConfiguration>
+    <DefaultFont>
+      <Name>Calibri</Name> <!-- Change font name as needed -->
+      <Size>11</Size> <!-- Change font size as needed -->
+      <Color>Automatic</Color>
+      <Italic>false</Italic>
+      <Bold>false</Bold>
+      <Underline>false</Underline>
+    </DefaultFont>
+  </Add-OfficeClientConfiguration>
+</Configuration>
+"@
+
+# Convert XML to Base64 encoding
+$xmlBytes = [System.Text.Encoding]::UTF8.GetBytes($xmlTemplate)
+$encodedXml = [System.Convert]::ToBase64String($xmlBytes)
+$encodedXml = [System.Text.Encoding]::ASCII.GetString($encodedXml)
+
+# Define the OMA-URI
+$omaUri = "Vendor/MSFT/Office/Outlook/DefaultFontSettings"
+
+# Set the configuration policy through Intune
+New-DeviceConfigurationPolicy -Name "Outlook Default Font Settings" -Description "Configures default font settings for Outlook" -OMAUri $omaUri -OMASettingXml $encodedXml -DeviceType "Windows10" -AutoSelectOnEnroll $true
+
+
+This script does the following:
+
+1. Defines an XML template specifying the default font settings for Outlook.
+2. Converts the XML to Base64 encoding, which is required for Intune.
+3. Defines the OMA-URI for Outlook default font settings.
+4. Sets the configuration policy in Intune using `New-DeviceConfigurationPolicy`.
+
+Ensure that you replace `"Calibri"`, `11`, and other settings in the XML template with your desired font name, size, etc., as needed. Additionally, modify the policy name and description according to your preferences.
