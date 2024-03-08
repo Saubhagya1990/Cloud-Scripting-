@@ -1,0 +1,42 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "hostpools_ax_avdhp_act_p_p_we_name": {
+            "defaultValue": "ax-avdhp-act-p-p-we",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.DesktopVirtualization/hostpools",
+            "apiVersion": "2023-11-01-preview",
+            "name": "[parameters('hostpools_ax_avdhp_act_p_p_we_name')]",
+            "location": "westeurope",
+            "tags": {
+                "ApplicationName": " AVD",
+                "Hostpool": "ACT AVD",
+                "HostpoolType": "Pooled",
+                "Environment": "Prd",
+                "BusinessUnit": "IT",
+                "OwnerName": "   ",
+                "CreatedBy": "  ",
+                "Usedfor": "AVD West Europe",
+                "StartDate": "2023-12-15"
+            },
+            "properties": {
+                "managementType": "Standard",
+                "description": "Created through the Azure Virtual Desktop extension",
+                "hostPoolType": "Pooled",
+                "customRdpProperty": "drivestoredirect:s:*;audiomode:i:0;videoplaybackmode:i:1;redirectclipboard:i:1;redirectprinters:i:1;devicestoredirect:s:*;redirectcomports:i:1;redirectsmartcards:i:1;usbdevicestoredirect:s:*;enablecredsspsupport:i:1;redirectwebauthn:i:1;use multimon:i:1;",
+                "maxSessionLimit": 4,
+                "loadBalancerType": "BreadthFirst",
+                "validationEnvironment": true,
+                "vmTemplate": "{\"domain\":\"arxada.com\",\"galleryImageOffer\":null,\"galleryImagePublisher\":null,\"galleryImageSKU\":null,\"imageType\":\"CustomImage\",\"customImageId\":\"/subscriptions/1b051350-735a-4d2e-9319-9e026346aa96/resourceGroups/ax-avd-gloden-image-p/providers/Microsoft.Compute/galleries/axvdglodenimage/images/AXVDGLDIMGENDUS_Win10-22h2-19045/versions/11.2023.001\",\"namePrefix\":\"AXVDACTPPWE\",\"osDiskType\":\"StandardSSD_LRS\",\"vmSize\":{\"id\":\"Standard_D4as_v4\",\"cores\":4,\"ram\":16,\"rdmaEnabled\":false,\"supportsMemoryPreservingMaintenance\":true},\"galleryItemId\":null,\"hibernate\":false,\"diskSizeGB\":0,\"securityType\":\"Standard\",\"secureBoot\":false,\"vTPM\":false,\"vmInfrastructureType\":\"Cloud\",\"virtualProcessorCount\":null,\"memoryGB\":null,\"maximumMemoryGB\":null,\"minimumMemoryGB\":null,\"dynamicMemoryConfig\":false}",
+                "preferredAppGroupType": "Desktop",
+                "startVMOnConnect": false
+            }
+        }
+    ]
+}
